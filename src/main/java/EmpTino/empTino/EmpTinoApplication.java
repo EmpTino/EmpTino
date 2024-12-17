@@ -8,7 +8,6 @@ public class EmpTinoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EmpTinoApplication.class, args);
-		// 123
 	}
 
 }
