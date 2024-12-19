@@ -1,23 +1,15 @@
 package EmpTino.empTino.classroom.service;
 
-import EmpTino.empTino.classroom.domain.Classroom;
-import EmpTino.empTino.classroom.repository.ClassroomRepository;
-import lombok.RequiredArgsConstructor;
+import EmpTino.empTino.classroom.domain.ClassroomDAO;
+import EmpTino.empTino.classroom.repository.ClassroomDAORepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
-@Transactional
-@RequiredArgsConstructor
 public class ClassroomService {
+    private final ClassroomDAORepository classroomDAORepository;
 
-    private final ClassroomRepository classroomRepository;
-
-    public List<Classroom> findAllClassroom(){
-        return classroomRepository.findAll();
+    public ClassroomService(ClassroomDAORepository classroomDAORepository) {
+        this.classroomDAORepository = classroomDAORepository;
     }
-
-
 }

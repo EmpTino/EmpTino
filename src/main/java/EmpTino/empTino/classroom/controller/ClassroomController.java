@@ -1,8 +1,9 @@
 package EmpTino.empTino.classroom.controller;
 
-import EmpTino.empTino.classroom.domain.Classroom;
+import EmpTino.empTino.classroom.domain.ClassroomDAO;
 import EmpTino.empTino.classroom.service.ClassroomService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,18 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/classroom")
-@RequiredArgsConstructor
+@RequestMapping(value = "/api/classroom")
 public class ClassroomController {
+    private final ClassroomService classroomService;
 
-    public final ClassroomService classroomService;
-
-    @GetMapping()
-    public String classroom(Model model) {
-        List<Classroom> classrooms = classroomService.findAllClassroom();
-        model.addAttribute("classrooms", classrooms);
-
-        return "classrooms";
+    public ClassroomController(ClassroomService classroomService) {
+        this.classroomService = classroomService;
     }
-
 }

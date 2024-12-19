@@ -1,6 +1,6 @@
 package EmpTino.empTino.review.controller;
 
-import EmpTino.empTino.review.domain.Review;
+import EmpTino.empTino.review.domain.ReviewDAO;
 import EmpTino.empTino.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -13,28 +13,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequiredArgsConstructor
-@RequestMapping("api/reviews")
+@RequestMapping(value = "api/reviews")
 public class ReviewController {
+    private final ReviewService reviewService;
 
-    public final ReviewService reviewService;
+    public ReviewController(ReviewService reviewService){
+        this.reviewService = reviewService;
+    }
 
     @PostMapping
-    public String createReview(@ModelAttribute Review review) {
-        reviewService.createReview(review);
+    public String createReview(@ModelAttribute ReviewDAO reviewDAO) {
+        reviewService.createReview(reviewDAO);
         return "redirect:/reviews";
     }
 
     @GetMapping
     public String findAllReview(Model model) {
-        List<Review> reviews = reviewService.findAllReviews();
-        model.addAttribute("reviews", reviews);
+        List<ReviewDAO> reviewDAOS = reviewService.findAllReviews();
+        model.addAttribute("reviews", reviewDAOS);
         return "reviewList";
     }
 
     @GetMapping("/news")
     public String newReviewForm(Model model) {
-        model.addAttribute("review", new Review());
+        model.addAttribute("review", new ReviewDAO());
         return "reviewForm";
     }
 
