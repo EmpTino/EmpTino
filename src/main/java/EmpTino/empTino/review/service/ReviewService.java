@@ -1,7 +1,7 @@
 package EmpTino.empTino.review.service;
 
-import EmpTino.empTino.review.domain.Review;
-import EmpTino.empTino.review.repository.ReviewRepository;
+import EmpTino.empTino.review.domain.ReviewDAO;
+import EmpTino.empTino.review.repository.ReviewDAORepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,18 +9,20 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
-@RequiredArgsConstructor
 public class ReviewService {
 
-    private final ReviewRepository reviewRepository;
+    private final ReviewDAORepository reviewDAORepository;
 
-    public void createReview(Review review) {
-        reviewRepository.save(review);
+    public ReviewService(ReviewDAORepository reviewDAORepository){
+        this.reviewDAORepository = reviewDAORepository;
     }
 
-    public List<Review> findAllReviews() {
-        return reviewRepository.findAll();
+    public void createReview(ReviewDAO reviewDAO) {
+        reviewDAORepository.save(reviewDAO);
+    }
+
+    public List<ReviewDAO> findAllReviews() {
+        return reviewDAORepository.findAll();
     }
 
 }
