@@ -1,6 +1,6 @@
 package EmpTino.empTino.friend.controller;
 
-import EmpTino.empTino.user.service.FriendService;
+import EmpTino.empTino.friend.service.FriendService;
 import org.springframework.stereotype.Controller;
 
 @Controller
