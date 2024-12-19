@@ -1,6 +1,6 @@
-package EmpTino.empTino.User.service;
+package EmpTino.empTino.user.service;
 
-import EmpTino.empTino.User.repository.UserDAORepository;
+import EmpTino.empTino.user.repository.UserDAORepository;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,7 +1,6 @@
-package EmpTino.empTino.User.repository;
+package EmpTino.empTino.user.repository;
 
-import EmpTino.empTino.User.domain.UserDAO;
-import EmpTino.empTino.review.domain.ReviewDAO;
+import EmpTino.empTino.user.domain.UserDAO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
