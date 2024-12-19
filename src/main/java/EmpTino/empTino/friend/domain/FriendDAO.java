@@ -1,9 +1,12 @@
-package EmpTino.empTino.User.domain;
+package EmpTino.empTino.friend.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
@@ -11,22 +14,20 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.UUID;
 
 @Entity
-@Getter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDAO {
+public class FriendDAO {
 
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @ColumnDefault("random_uuid()")
     @Column(updatable = false, nullable = false)
-    private UUID lectureId;
+    private UUID friendId;
 
-    private String LectureName;
-
-    private String professor;
-
-    private UUID ClassroomId;
+    private UUID fromUserId;
+    private UUID toUserId;
+    private boolean isAccepted;
 }

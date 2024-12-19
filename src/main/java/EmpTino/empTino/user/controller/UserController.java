@@ -1,6 +1,6 @@
-package EmpTino.empTino.User.controller;
+package EmpTino.empTino.user.controller;
 
-import EmpTino.empTino.User.service.UserService;
+import EmpTino.empTino.user.service.UserService;
 import org.springframework.stereotype.Controller;
 
 @Controller
