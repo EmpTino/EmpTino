@@ -4,6 +4,7 @@ import EmpTino.empTino.user.domain.UserDAO;
 import EmpTino.empTino.user.repository.UserDAORepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -17,14 +18,19 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    // 회원가입
+    @Transactional
     public UserDAO register(UserDAO userDAO) {
         if (userDAORepository.findByUserName(userDAO.getUserName()).isPresent()) {
             throw new IllegalArgumentException("User already exists with this username.");
         }
-        userDAO.setPassword(passwordEncoder.encode(userDAO.getPassword())); // 비밀번호 암호화
+        // 비밀번호 암호화
+        userDAO.setPassword(passwordEncoder.encode(userDAO.getPassword()));
         return userDAORepository.save(userDAO);
     }
 
+    // 로그인
+    @Transactional(readOnly = true)
     public UserDAO login(String userName, String password) {
         Optional<UserDAO> userOpt = userDAORepository.findByUserName(userName);
 

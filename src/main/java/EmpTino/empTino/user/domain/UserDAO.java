@@ -1,9 +1,6 @@
 package EmpTino.empTino.user.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
@@ -24,7 +21,7 @@ public class UserDAO {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 //    @ColumnDefault("random_uuid()")
     @Column(updatable = false, nullable = false)
-    private UUID userId;
+    private String userId;
 
     private String userName;
     private String password;
@@ -33,4 +30,7 @@ public class UserDAO {
     private String realName;
 
     private boolean isAdmin;
+
+//    @Version
+//    private Long version;
 }

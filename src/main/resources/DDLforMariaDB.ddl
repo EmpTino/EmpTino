@@ -43,6 +43,8 @@ CREATE TABLE reviewdao (
 CREATE TABLE userdao (
                          user_id CHAR(36) NOT NULL PRIMARY KEY,  -- UUID로 사용
                          user_name VARCHAR(255),
-                         professor VARCHAR(255),
-                         classroom_id CHAR(36) NOT NULL
+                         password VARCHAR(255),
+                         nickname CHAR(255),
+                         real_name VARCHAR(255),
+                         is_admin BOOLEAN
 );

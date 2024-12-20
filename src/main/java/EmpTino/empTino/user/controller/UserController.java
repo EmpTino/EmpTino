@@ -16,6 +16,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    // 회원가입
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserDAO userDAO) {
         try {
@@ -26,6 +27,7 @@ public class UserController {
         }
     }
 
+    // 로그인
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestParam String userName, @RequestParam String password) {
         try {
