@@ -17,7 +17,7 @@ public class ReviewDAO {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @ColumnDefault("random_uuid()")
+//    @ColumnDefault("random_uuid()")
     @Column(updatable = false, nullable = false)
     private UUID ReviewId;
 

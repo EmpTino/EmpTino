@@ -1,56 +1,48 @@
--- Drop and create table for Classroom
-DROP TABLE IF EXISTS Classroom;
-CREATE TABLE Classroom (
-    classroomId CHAR(36) PRIMARY KEY,
-    classroomName VARCHAR(255),
-    buildingName VARCHAR(255),
-    floor INT
+use emptino;
+-- Drop existing tables if they exist
+DROP TABLE IF EXISTS classroomdao;
+DROP TABLE IF EXISTS lecturedao;
+DROP TABLE IF EXISTS lecturetimedao;
+DROP TABLE IF EXISTS reviewdao;
+DROP TABLE IF EXISTS userdao;
+
+-- Create classroomdao table
+CREATE TABLE classroomdao (
+                              classroom_id CHAR(36) NOT NULL PRIMARY KEY,   -- UUID로 사용
+                              classroom_name VARCHAR(255),
+                              building_name VARCHAR(255),
+                              floor INT
 );
 
--- Drop and create table for Friend
-DROP TABLE IF EXISTS Friend;
-CREATE TABLE Friend (
-    friendId CHAR(36) PRIMARY KEY,
-    fromUserId CHAR(36),
-    toUserId CHAR(36),
-    isAccepted BOOLEAN
+-- Create lecturedao table (FK 없이)
+CREATE TABLE lecturedao (
+                            lecture_id CHAR(36) NOT NULL PRIMARY KEY,  -- UUID로 사용
+                            lecture_name VARCHAR(255),
+                            professor VARCHAR(255),
+                            classroom_id CHAR(36) NOT NULL  -- Foreign Key 없이 단순히 classroom_id만 있음
 );
 
--- Drop and create table for Lecture
-DROP TABLE IF EXISTS Lecture;
-CREATE TABLE Lecture (
-    lectureId CHAR(36) PRIMARY KEY,
-    lectureName VARCHAR(255),
-    professor VARCHAR(255),
-    classroomId CHAR(36)
+-- Create lecturetimedao table (FK 없이)
+CREATE TABLE lecturetimedao (
+                                lecture_time_id CHAR(36) NOT NULL PRIMARY KEY,  -- UUID로 사용
+                                lecture_id CHAR(36) NOT NULL,  -- Foreign Key 없이 단순히 lecture_id만 있음
+                                day VARCHAR(255),
+                                time VARCHAR(255)
 );
 
--- Drop and create table for LectureTime
-DROP TABLE IF EXISTS LectureTime;
-CREATE TABLE LectureTime (
-    lectureTimeId CHAR(36) PRIMARY KEY,
-    lectureId CHAR(36),
-    day VARCHAR(50),
-    time VARCHAR(50)
+-- Create reviewdao table (FK 없이)
+CREATE TABLE reviewdao (
+                           review_id CHAR(36) NOT NULL PRIMARY KEY,  -- UUID로 사용
+                           classroom_id CHAR(36) NOT NULL,  -- Foreign Key 없이 단순히 classroom_id만 있음
+                           user_name VARCHAR(255),
+                           mark INT,
+                           content VARCHAR(255)
 );
 
--- Drop and create table for Review
-DROP TABLE IF EXISTS Review;
-CREATE TABLE Review (
-    reviewId CHAR(36) PRIMARY KEY,
-    classroomId CHAR(36),
-    userName VARCHAR(255),
-    mark INT,
-    content TEXT
-);
-
--- Drop and create table for User
-DROP TABLE IF EXISTS User;
-CREATE TABLE User (
-    userId CHAR(36) PRIMARY KEY,
-    userName VARCHAR(255),
-    password VARCHAR(255),
-    nickname VARCHAR(255),
-    realName VARCHAR(255),
-    isAdmin BOOLEAN
+-- Create userdao table (FK 없이)
+CREATE TABLE userdao (
+                         user_id CHAR(36) NOT NULL PRIMARY KEY,  -- UUID로 사용
+                         user_name VARCHAR(255),
+                         professor VARCHAR(255),
+                         classroom_id CHAR(36) NOT NULL
 );
