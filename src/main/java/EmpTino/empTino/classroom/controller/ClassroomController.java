@@ -4,7 +4,7 @@ import EmpTino.empTino.classroom.domain.ClassroomDAO;
 import EmpTino.empTino.classroom.service.ClassroomService;
 import EmpTino.empTino.lecture.domain.LectureDAO;
 import EmpTino.empTino.lecture.service.LectureService;
-import EmpTino.empTino.lectureTime.domain.LecturetimeDAO;
+import EmpTino.empTino.lectureTime.domain.LectureTimeDAO;
 import EmpTino.empTino.lectureTime.service.LectureTimeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -78,13 +78,13 @@ public class ClassroomController {
 
         List<LectureDAO> lectures = lectureService.findLecturesByClassroomId(id);
         log.info("Found {} lectures for classroom {} [ id ]", lectures.size(), classroom);
-        List<LecturetimeDAO> lectureTimes = new ArrayList<>();
+        List<LectureTimeDAO> lectureTimes = new ArrayList<>();
         for (LectureDAO lecture : lectures) {
             lectureTimes.addAll(lectureTimeService.findLectureTimeByLecture(lecture.getLectureId()));
         }
         log.info("Found {} lecturestime for classroom {} [ id ]", lectureTimes.size(), classroom);
-        Map<String, Set<LecturetimeDAO>> lectureTimesMap = new HashMap<>();
-        for (LecturetimeDAO lectureTime : lectureTimes) {
+        Map<String, Set<LectureTimeDAO>> lectureTimesMap = new HashMap<>();
+        for (LectureTimeDAO lectureTime : lectureTimes) {
             log.info("Adding lecture time for lectureId {}: {} - {}",
                     lectureTime.getLectureId(), lectureTime.getDay(), lectureTime.getTime());
             lectureTimesMap
