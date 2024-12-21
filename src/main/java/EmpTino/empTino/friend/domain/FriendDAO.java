@@ -24,12 +24,15 @@ public class FriendDAO {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 //    @ColumnDefault("random_uuid()")
-    @Column(updatable = false, nullable = false)
+
     // userdao의 userid를 String 형식으로 선언함에 따라
     // frienddao의 id 형식도 String 형식으로 선언
+    @Column(updatable = false, nullable = false)
     private String friendId;
 
+    // 친구 요청을 보낸 유저 id
     private String fromUserId;
+    // 친구 요청을 받은 유저 id
     private String toUserId;
 
     private boolean isAccepted;

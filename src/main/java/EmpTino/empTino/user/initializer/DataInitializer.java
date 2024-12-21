@@ -20,15 +20,34 @@ public class DataInitializer {
     public CommandLineRunner initializeData(UserDAORepository userDAORepository, PasswordEncoder passwordEncoder) {
         return args -> {
             if (userDAORepository.count() == 0) {
-                UserDAO user = UserDAO.builder()
+                UserDAO testadmin = UserDAO.builder()
                         .userName("admin")
                         .password(passwordEncoder.encode("admin123"))
                         .nickname("Admin")
                         .realName("Administrator")
                         .isAdmin(true)
                         .build();
+                userDAORepository.save(testadmin);
 
-                userDAORepository.save(user);
+                // 일반 사용자 1 생성
+                UserDAO user1 = UserDAO.builder()
+                        .userName("user1")
+                        .password(passwordEncoder.encode("user123"))
+                        .nickname("UserOne")
+                        .realName("User One")
+                        .isAdmin(false)
+                        .build();
+                userDAORepository.save(user1);
+
+                // 일반 사용자 2 생성
+                UserDAO user2 = UserDAO.builder()
+                        .userName("user2")
+                        .password(passwordEncoder.encode("user123"))
+                        .nickname("UserTwo")
+                        .realName("User Two")
+                        .isAdmin(false)
+                        .build();
+                userDAORepository.save(user2);
             }
         };
     }

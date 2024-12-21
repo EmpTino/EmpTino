@@ -20,9 +20,10 @@ public class UserDAO {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 //    @ColumnDefault("random_uuid()")
-    @Column(updatable = false, nullable = false)
+
     // UUID 형식으로 선언 시 오류가 너무 많이 발생...
     // String 형식으로 UUID 데이터 구조 저장
+    @Column(updatable = false, nullable = false)
     private String userId;
 
     @Column(nullable = false)
@@ -35,7 +36,4 @@ public class UserDAO {
 
     // 기본값 : false
     private boolean isAdmin;
-
-//    @Version
-//    private Long version;
 }
