@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Service
+@RestController
+@RequestMapping("/api/timetables")
 public class TimetableController {
 
     private final TimetableService timetableService;
