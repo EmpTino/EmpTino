@@ -24,7 +24,7 @@ CREATE TABLE lecturedao (
 );
 
 -- Create lecturetimedao table (FK 없이)
-CREATE TABLE lecturetimedao (
+CREATE TABLE lecture_timedao (
                                 lecture_time_id CHAR(36) NOT NULL PRIMARY KEY,  -- UUID로 사용
                                 lecture_id CHAR(36) NOT NULL,  -- Foreign Key 없이 단순히 lecture_id만 있음
                                 day VARCHAR(255),
