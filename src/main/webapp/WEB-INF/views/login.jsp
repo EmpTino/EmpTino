@@ -82,7 +82,7 @@
 
 <div class="login-container">
     <h2>로그인</h2>
-    <form action="${pageContext.request.contextPath}/login" method="post">
+    <form action="${pageContext.request.contextPath}/api/auth/login" method="post">
         <label for="userName">아이디</label>
         <input type="text" id="userName" name="userName" placeholder="아이디를 입력하세요" required>
 
@@ -91,7 +91,7 @@
 
         <button type="submit">로그인</button>
     </form>
-    <p><a href="${pageContext.request.contextPath}/signup">회원가입</a></p>
+    <p><a href="${pageContext.request.contextPath}/api/auth/signup">회원가입</a></p>
 </div>
 </body>
 </html>

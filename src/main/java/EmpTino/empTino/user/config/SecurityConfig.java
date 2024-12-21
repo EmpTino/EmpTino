@@ -34,7 +34,9 @@ public class SecurityConfig {
                         .anyRequest().permitAll() // 나머지는 모두 인증 필요없음
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)   // 필터 추가
-                .formLogin(form -> form.permitAll()) // 기본 로그인 허용
+                .formLogin(form -> form
+                        .loginPage("/api/auth/login")
+                        .permitAll()) // 기본 로그인 허용
                 .logout(logout -> logout.permitAll()); // 로그아웃 허용
 
 

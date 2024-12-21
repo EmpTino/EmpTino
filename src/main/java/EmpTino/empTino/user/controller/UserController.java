@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-@RestController
+@Controller
 @RequestMapping("/api/auth")
 public class UserController {
     private final UserService userService;
@@ -21,12 +21,21 @@ public class UserController {
         this.jwtUtil = jwtUtil;
     }
 
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login";
+    }
+    @GetMapping("/signup")
+    public String showSignUpPage() {
+        return "signup";
+    }
+
     // 회원가입
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody UserDAO userDAO) {
+    @PostMapping("/signup")
+    public ResponseEntity<?> signup(@RequestBody UserDAO userDAO) {
         try {
-            UserDAO registeredUser = userService.register(userDAO);
-            return ResponseEntity.ok(registeredUser);
+            UserDAO signedUpUser = userService.signup(userDAO);
+            return ResponseEntity.ok(signedUpUser);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

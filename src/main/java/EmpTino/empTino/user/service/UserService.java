@@ -20,7 +20,7 @@ public class UserService {
 
     // 회원가입
     @Transactional
-    public UserDAO register(UserDAO userDAO) {
+    public UserDAO signup(UserDAO userDAO) {
         if (userDAORepository.findByUserName(userDAO.getUserName()).isPresent()) {
             throw new IllegalArgumentException("User already exists with this username.");
         }
