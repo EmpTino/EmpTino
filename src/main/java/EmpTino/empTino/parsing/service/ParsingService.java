@@ -54,9 +54,9 @@ public class ParsingService {
 
             // 강의 데이터 생성 및 저장
             LectureDAO lectureDAO = LectureDAO.builder()
-                    .LectureName(lectureName)
+                    .lectureName(lectureName)
                     .professor(professor)
-                    .ClassroomId(classroomDAO.getClassroomId()) // 강의실 ID 연결
+                    .classroomId(classroomDAO.getClassroomId()) // 강의실 ID 연결
                     .build();
             lectureDAO = lectureDAORepository.save(lectureDAO);
 
