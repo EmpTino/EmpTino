@@ -10,4 +10,6 @@ public class LectureTimeController {
     public LectureTimeController(LectureTimeService lectureTimeService){
         this.lectureTimeService = lectureTimeService;
     }
+
+
 }

@@ -1,12 +1,12 @@
 package EmpTino.empTino.lectureTime.repository;
 
-import EmpTino.empTino.lecture.domain.LectureDAO;
-import EmpTino.empTino.lectureTime.domain.LectureTimeDAO;
+import EmpTino.empTino.lectureTime.domain.LecturetimeDAO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.UUID;
+import java.util.List;
 
 @Repository
-public interface LectureTimeDAORepository extends JpaRepository<LectureTimeDAO, UUID> {
+public interface LectureTimeDAORepository extends JpaRepository<LecturetimeDAO, String> {
+    List<LecturetimeDAO> findByLectureId(String lectureId);
 }
