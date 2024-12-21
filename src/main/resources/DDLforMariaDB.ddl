@@ -28,7 +28,7 @@ CREATE TABLE lecturetimedao (
                                 lecture_time_id CHAR(36) NOT NULL PRIMARY KEY,  -- UUID로 사용
                                 lecture_id CHAR(36) NOT NULL,  -- Foreign Key 없이 단순히 lecture_id만 있음
                                 day VARCHAR(255),
-                                time VARCHAR(255)
+                                time INT(16)
 );
 
 -- Create reviewdao table (FK 없이)
