@@ -2,7 +2,7 @@ use emptino;
 -- Drop existing tables if they exist
 DROP TABLE IF EXISTS classroomdao;
 DROP TABLE IF EXISTS lecturedao;
-DROP TABLE IF EXISTS lecturetimedao;
+DROP TABLE IF EXISTS lecture_timedao;
 DROP TABLE IF EXISTS reviewdao;
 DROP TABLE IF EXISTS userdao;
 DROP TABLE IF EXISTS frienddao;
