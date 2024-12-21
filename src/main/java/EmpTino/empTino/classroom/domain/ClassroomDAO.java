@@ -19,7 +19,7 @@ public class ClassroomDAO {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 //    @ColumnDefault("random_uuid()")
     @Column(updatable = false, nullable = false)
-    private UUID classroomId;
+    private String classroomId;
 
     private String classroomName;
 

@@ -20,12 +20,12 @@ public class LectureTimeDAO {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 //    @ColumnDefault("random_uuid()")
     @Column(updatable = false, nullable = false)
-    private UUID lectureTimeId;
+    private String lectureTimeId;
 
-    private UUID lectureId;
+    private String lectureId;
 
     private String day;
 
-    private String time;
+    private int time;
 
 }
