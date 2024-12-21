@@ -49,9 +49,10 @@ CREATE TABLE userdao (
                          real_name VARCHAR(255),
                          is_admin BOOLEAN
 );
-CREATE TABLE frienddao {
+
+CREATE TABLE frienddao (
                          friend_id CHAR(36) NOT NULL PRIMARY KEY,
                          from_user_id CHAR(36),
                          to_user_id CHAR(36),
                          is_accepted BOOLEAN
-    }
+);
