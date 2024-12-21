@@ -49,6 +49,7 @@ public class TimetableController {
 
     // 시간표에 강의 추가
     @PostMapping("/add")
+    @ResponseBody
     public ResponseEntity<TimetableDAO> addLecturesToTimeTable(
             @RequestBody List<Integer> lectureIds) {
         String loggedInUserId = getLoggedInUserId();
