@@ -1,29 +1,27 @@
-package EmpTino.empTino.lecture.domain;
+package EmpTino.empTino.lectureTime.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
-
-import java.util.UUID;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LectureDAO {
+public class LecturetimeDAO {
 
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 //    @ColumnDefault("random_uuid()")
     @Column(updatable = false, nullable = false)
+    private String lectureTimeId;
+
     private String lectureId;
 
-    private String lectureName;
+    private String day;
 
-    private String professor;
+    private int time;
 
-    private String classroomId;
 }
