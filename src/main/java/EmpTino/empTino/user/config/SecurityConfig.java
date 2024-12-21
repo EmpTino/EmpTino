@@ -32,9 +32,13 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll() // /api/auth/**는 인증 없이 접근 가능
                         .requestMatchers("/api/friends/**").authenticated() // 친구 관련 기능은 인증 필요
+                        .requestMatchers("/api/timetable/**").authenticated()   // 시간표 관련 기능은 인증 필요
                         .anyRequest().authenticated() // 나머지 요청은 인증 필요
                 )
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // 필터 추가
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)   // 필터 추가
+                .formLogin(form -> form.permitAll()) // 기본 로그인 허용
+                .logout(logout -> logout.permitAll()); // 로그아웃 허용
+
 
         return http.build();
     }

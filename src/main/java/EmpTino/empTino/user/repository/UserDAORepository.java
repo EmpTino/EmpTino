@@ -8,6 +8,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface UserDAORepository extends JpaRepository<UserDAO, UUID> {
+public interface UserDAORepository extends JpaRepository<UserDAO, String> {
     Optional<UserDAO> findByUserName(String userName);
 }
