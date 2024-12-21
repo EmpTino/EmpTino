@@ -11,17 +11,11 @@ import java.util.UUID;
 
 @Repository
 public interface FriendDAORepository extends JpaRepository<FriendDAO, String> {
-    // 요청을 보낸 친구 조회
-    List<FriendDAO> findByFromUserId(String fromUserId);
-
-    // 친구 요청 조회
-    List<FriendDAO> findByToUserIdAndIsAccepted(String toUserId, boolean isAccepted);
+    // 친구 요청 목록 조회
+    @Query("SELECT f FROM FriendDAO f WHERE f.toUserId = :toUserId AND f.isAccepted = false")
+    List<FriendDAO> findPendingRequests(@Param("toUserId") String toUserId);
 
     // 친구 목록 조회
-    List<FriendDAO> findByFromUserIdOrToUserIdAndIsAccepted(String fromUserId, String toUserId, boolean isAccepted);
-
-    // JPQL 사용
-    @Query("SELECT f FROM FriendDAO f WHERE (f.fromUserId = :userId OR f.toUserId = :userId) AND f.isAccepted = :isAccepted")
-    List<FriendDAO> findFriendsByUserIdAndIsAccepted(@Param("userId") String userId, @Param("isAccepted") boolean isAccepted);
-
+    @Query("SELECT f FROM FriendDAO f WHERE (f.fromUserId = :userId OR f.toUserId = :userId) AND f.isAccepted = true")
+    List<FriendDAO> findAcceptedFriends(@Param("userId") String userId);
 }

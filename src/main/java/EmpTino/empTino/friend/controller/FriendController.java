@@ -38,16 +38,15 @@ public class FriendController {
         return ResponseEntity.noContent().build();
     }
 
-    // 친구 목록 조회
-    @GetMapping
-    public ResponseEntity<List<FriendDAO>> getFriends(Authentication authentication) {
-        String userId = authentication.getName(); // 로그인된 사용자의 이름(ID)
-        return ResponseEntity.ok(friendService.getFriends(userId));
-    }
-
     // 친구 요청 조회
     @GetMapping("/requests")
     public ResponseEntity<List<FriendDAO>> getPendingRequests(@RequestParam String toUserId) {
         return ResponseEntity.ok(friendService.getPendingRequests(toUserId));
+    }
+
+    // 친구 목록 조회
+    @GetMapping
+    public ResponseEntity<List<FriendDAO>> getFriends(@RequestParam String userId) {
+        return ResponseEntity.ok(friendService.getFriends(userId));
     }
 }

@@ -37,13 +37,13 @@ public class FriendService {
         friendDAORepository.deleteById(friendId);
     }
 
-    // 친구 목록 조회
-    public List<FriendDAO> getFriends(String userId) {
-        return friendDAORepository.findByFromUserIdOrToUserIdAndIsAccepted(userId, userId, true);
-    }
-
     // 친구 요청 목록 조회
     public List<FriendDAO> getPendingRequests(String toUserId) {
-        return friendDAORepository.findByToUserIdAndIsAccepted(toUserId, false);
+        return friendDAORepository.findPendingRequests(toUserId); // 대기 중인 요청 목록
+    }
+
+    // 친구 목록 조회
+    public List<FriendDAO> getFriends(String userId) {
+        return friendDAORepository.findAcceptedFriends(userId); // 수락된 친구 목록
     }
 }
