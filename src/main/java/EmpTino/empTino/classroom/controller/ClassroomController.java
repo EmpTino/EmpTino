@@ -12,11 +12,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/api/classroom")
+@RequestMapping("/classrooms")
 public class ClassroomController {
     private final ClassroomService classroomService;
 
     public ClassroomController(ClassroomService classroomService) {
         this.classroomService = classroomService;
     }
+
+    @GetMapping
+    public String classrooms(Model model) {
+        List<ClassroomDAO> classrooms = classroomService.findAllClassroom();
+        model.addAttribute("classrooms", classrooms);  // JSP로 전달할 데이터 추가
+        return "classrooms";  // JSP 파일 이름 (classrooms.jsp)
+    }
+
+
+
 }
