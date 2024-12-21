@@ -1,3 +1,7 @@
+// 서버 시작 시 테스트용 관리자 계정 생성
+// username = admin, password = admin123
+// isAdmin = 1 (관리자 계정이라는 의미)
+
 package EmpTino.empTino.user.initializer;
 
 import EmpTino.empTino.user.domain.UserDAO;

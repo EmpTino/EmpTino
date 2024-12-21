@@ -21,14 +21,19 @@ public class UserDAO {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 //    @ColumnDefault("random_uuid()")
     @Column(updatable = false, nullable = false)
+    // UUID 형식으로 선언 시 오류가 너무 많이 발생...
+    // String 형식으로 UUID 데이터 구조 저장
     private String userId;
 
+    @Column(nullable = false)
     private String userName;
+    @Column(nullable = false)
     private String password;
 
     private String nickname;
     private String realName;
 
+    // 기본값 : false
     private boolean isAdmin;
 
 //    @Version
