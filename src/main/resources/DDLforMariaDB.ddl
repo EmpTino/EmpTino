@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS lecturetimedao;
 DROP TABLE IF EXISTS reviewdao;
 DROP TABLE IF EXISTS userdao;
 DROP TABLE IF EXISTS frienddao;
+DROP TABLE IF EXISTS timetabledao;
 
 -- Create classroomdao table
 CREATE TABLE classroomdao (
@@ -55,4 +56,10 @@ CREATE TABLE frienddao (
                            from_user_id CHAR(36),
                            to_user_id CHAR(36),
                            is_accepted BOOLEAN
+);
+
+CREATE TABLE timetabledao (
+                         timetable_id CHAR(36) NOT NULL PRIMARY KEY,
+                         user_id CHAR(36) NOT NULL,
+                         lecture_ids JSON
 );
