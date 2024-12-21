@@ -59,7 +59,7 @@ CREATE TABLE frienddao (
 );
 
 CREATE TABLE timetabledao (
-                         timetable_id CHAR(36) AUTO_INCREMENT PRIMARY KEY,
+                         timetable_id CHAR(36) NOT NULL PRIMARY KEY,
                          user_id CHAR(36) NOT NULL,
                          lecture_ids JSON
 );
