@@ -25,32 +25,22 @@ public class TimetableController {
         this.timetableService = timetableService;
     }
 
-    // 현재 로그인된 사용자의 ID를 가져오는 유틸리티 메서드
     private String getLoggedInUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication.getName(); // username을 userId로 사용
+        if (authentication == null || !authentication.isAuthenticated() || "anonymousUser".equals(authentication.getPrincipal())) {
+            return null; // 인증되지 않은 사용자
+        }
+        return authentication.getName();
     }
 
     // 시간표 조회 및 화면 표시
-    @GetMapping
-    public Object getTimeTableOrView(@RequestParam(required = false) String format, Model model) {
-        String loggedInUserId = getLoggedInUserId();
+    @GetMapping("/page")
+    public String showTimetablePage(Model model) {
+        // 시간표 관련 데이터 추가 (예: 요일 데이터)
+        List<String> days = List.of("월", "화", "수", "목", "금");
+        model.addAttribute("days", days);
 
-        // 시간표 데이터 가져오기
-        List<TimetableDAO> timetables = timetableService.getTimeTableByUserId(loggedInUserId);
-
-        if ("json".equalsIgnoreCase(format)) {
-            // JSON 응답 반환
-            return ResponseEntity.ok(timetables);
-        } else {
-            // 요일 목록 추가
-            List<String> days = List.of("월", "화", "수", "목", "금");
-            model.addAttribute("days", days);
-            model.addAttribute("timetables", timetables);
-
-            // JSP 뷰 반환
-            return "timetable";
-        }
+        return "timetable"; // JSP 뷰 이름 반환
     }
 
     // 시간표에 강의 추가
