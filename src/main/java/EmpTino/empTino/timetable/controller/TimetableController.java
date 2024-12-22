@@ -39,15 +39,15 @@ public class TimetableController {
         return ResponseEntity.ok(updatedTimetable);
     }
 
-/**
+
     // 로그인한 사용자의 시간표 조회
-    @GetMapping
-    public ResponseEntity<List<TimetableDAO>> getTimeTableByUser() {
-        String loggedInUserId = getLoggedInUserId();
-        List<TimetableDAO> timetables = timetableService.getTimeTableByUserId(loggedInUserId);
-        return ResponseEntity.ok(timetables);
-    }
- **/
+//    @GetMapping
+//    public ResponseEntity<List<TimetableDAO>> getTimeTableByUser() {
+//        String loggedInUserId = getLoggedInUserId();
+//        List<TimetableDAO> timetables = timetableService.getTimeTableByUserId(loggedInUserId);
+//        return ResponseEntity.ok(timetables);
+//    }
+
     @GetMapping
     public String showTimetable(Model model) {
         // 요일 목록 추가

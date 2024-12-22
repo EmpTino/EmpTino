@@ -30,7 +30,7 @@ public class SearchService {
         // Convert time to int
         int timeAsInt;
         try {
-            timeAsInt = Integer.parseInt(time);
+            timeAsInt = Integer.parseInt(String.valueOf(time));
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid time format: " + time);
         }

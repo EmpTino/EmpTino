@@ -6,6 +6,7 @@ import EmpTino.empTino.classroom.repository.ClassroomDAORepository;
 import EmpTino.empTino.lecture.repository.LectureDAORepository;
 import EmpTino.empTino.lectureTime.repository.LectureTimeDAORepository;
 import EmpTino.empTino.timetable.repository.TimetableDAORepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 
+@Slf4j
 @Service
 public class TimetableService {
     private final ClassroomDAORepository classroomDAORepository;
@@ -33,6 +35,7 @@ public class TimetableService {
     }
 
     public List<ClassroomDAO> findAvailableClassrooms(int time, String day) {
+        log.info("교시 + {}" + time, "요일 + {} " + day);
         // 조건에 맞는 lectureTimeId를 제외한 lectureId 목록
         List<String> busyLectureIds = lectureTimeDAORepository.findAll().stream()
                 .filter(lectureTime -> lectureTime.getTime() == time

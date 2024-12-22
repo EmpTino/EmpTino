@@ -28,10 +28,10 @@ CREATE TABLE lecturedao (
 
 -- Create lecturetimedao table (FK 없이)
 CREATE TABLE lecture_timedao (
-                                lecture_time_id CHAR(36) NOT NULL PRIMARY KEY,  -- UUID로 사용
-                                lecture_id CHAR(36) NOT NULL,  -- Foreign Key 없이 단순히 lecture_id만 있음
-                                day VARCHAR(255),
-                                time INT(16)
+                                 lecture_time_id CHAR(36) NOT NULL PRIMARY KEY,  -- UUID로 사용
+                                 lecture_id CHAR(36) NOT NULL,  -- Foreign Key 없이 단순히 lecture_id만 있음
+                                 day VARCHAR(255),
+                                 time INT(16)
 );
 
 -- Create reviewdao table (FK 없이)
@@ -61,7 +61,9 @@ CREATE TABLE frienddao (
 );
 
 CREATE TABLE timetabledao (
-                         timetable_id CHAR(36) NOT NULL PRIMARY KEY,
-                         user_id CHAR(36) NOT NULL,
-                         lecture_ids JSON
+                              timetable_id CHAR(36) NOT NULL PRIMARY KEY,
+                              user_id CHAR(36) NOT NULL,
+                              lecture_ids JSON
 );
+ALTER TABLE classroomdao
+    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
