@@ -70,23 +70,38 @@
 <%-- 검색 화면 --%>
 <div class="search-container">
     <h2>빈 강의실 검색</h2>
-    <form action="${pageContext.request.contextPath}/search" method="get">
-        <label for="building">건물:</label>
-        <select id="building" name="building" required>
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-            <option value="D">D</option>
-            <option value="E">E</option>
-        </select>
+    <form action="${pageContext.request.contextPath}/api/classrooms/search" method="get">
         <label for="time">시간:</label>
         <select id="time" name="time" required>
             <c:forEach var="i" begin="1" end="14">
-                <option value="${i}">${i}</option>
+                <option value="${i}" ${i == selectedTime ? 'selected' : ''}>${i}</option>
             </c:forEach>
         </select>
+
+        <label for="day">요일:</label>
+        <select id="day" name="day" required>
+            <option value="월" ${selectedDay == '월' ? 'selected' : ''}>월요일</option>
+            <option value="화" ${selectedDay == '화' ? 'selected' : ''}>화요일</option>
+            <option value="수" ${selectedDay == '수' ? 'selected' : ''}>수요일</option>
+            <option value="목" ${selectedDay == '목' ? 'selected' : ''}>목요일</option>
+            <option value="금" ${selectedDay == '금' ? 'selected' : ''}>금요일</option>
+        </select>
+
         <button type="submit">검색</button>
     </form>
+
+    <c:if test="${not empty message}">
+        <p>${message}</p>
+    </c:if>
+
+    <c:if test="${not empty rooms}">
+        <h3>검색된 강의실</h3>
+        <ul>
+            <c:forEach var="room" items="${rooms}">
+                <li>${room.name} - ${room.capacity}명</li>
+            </c:forEach>
+        </ul>
+    </c:if>
 </div>
 </body>
 </html>
