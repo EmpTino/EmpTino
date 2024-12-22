@@ -27,10 +27,18 @@ public class SearchService {
                 .filter(classroom -> classroom.getBuildingName().equalsIgnoreCase(building))
                 .collect(Collectors.toList());
 
+        // Convert time to int
+        int timeAsInt;
+        try {
+            timeAsInt = Integer.parseInt(time);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid time format: " + time);
+        }
+
         // Fetch occupied classroom IDs at the specified time
         List<String> occupiedClassroomIds = lectureTimeDAORepository.findAll()
                 .stream()
-                .filter(lectureTime -> lectureTime.getTime() == time) // Compare as integers
+                .filter(lectureTime -> lectureTime.getTime() == timeAsInt) // Compare as integers
                 .map(lectureTime -> lectureTime.getLectureId())
                 .collect(Collectors.toList());
 
