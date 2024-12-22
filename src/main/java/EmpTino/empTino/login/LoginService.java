@@ -20,7 +20,7 @@ public class LoginService {
     }
 
     public boolean isUserNameTaken(String userName) {
-        return userDAORepository.existsByUserName(userName);
+        return userDAORepository.existsByUserName((userName));
     }
     public UserDAO login(String userName, String password) {
         return userDAORepository.findByUserNameAndPassword(userName, password)

@@ -20,7 +20,7 @@ public class SearchService {
         this.lectureTimeDAORepository = lectureTimeDAORepository;
     }
 
-    public List<ClassroomDAO> findEmptyClassrooms(String building, String time) {
+    public List<ClassroomDAO> findEmptyClassrooms(String building, int time) {
         // Fetch classrooms in the specified building
         List<ClassroomDAO> classroomsInBuilding = classroomDAORepository.findAll()
                 .stream()
@@ -28,9 +28,9 @@ public class SearchService {
                 .collect(Collectors.toList());
 
         // Fetch occupied classroom IDs at the specified time
-        List<UUID> occupiedClassroomIds = lectureTimeDAORepository.findAll()
+        List<String> occupiedClassroomIds = lectureTimeDAORepository.findAll()
                 .stream()
-                .filter(lectureTime -> lectureTime.getTime().equals(time))
+                .filter(lectureTime -> lectureTime.getTime() == time) // Compare as integers
                 .map(lectureTime -> lectureTime.getLectureId())
                 .collect(Collectors.toList());
 

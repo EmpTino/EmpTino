@@ -1,6 +1,6 @@
 package EmpTino.empTino.lectureTime.service;
 
-import EmpTino.empTino.lectureTime.domain.LecturetimeDAO;
+import EmpTino.empTino.lectureTime.domain.LectureTimeDAO;
 import EmpTino.empTino.lectureTime.repository.LectureTimeDAORepository;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ public class LectureTimeService {
         this.lectureTimeDAORepository = lectureTimeDAORepository;
     }
 
-    public List<LecturetimeDAO> findLectureTimeByLecture(String lectureId) {
+    public List<LectureTimeDAO> findLectureTimeByLecture(String lectureId) {
         return lectureTimeDAORepository.findByLectureId(lectureId);
     }
 
