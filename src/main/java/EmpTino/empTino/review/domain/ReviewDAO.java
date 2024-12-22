@@ -19,13 +19,13 @@ public class ReviewDAO {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 //    @ColumnDefault("random_uuid()")
     @Column(updatable = false, nullable = false)
-    private UUID ReviewId;
+    private String ReviewId;
 
-    private UUID classroomId;
+    private String classroomId;
 
     private String userName;
     
-    //강의실 펼점 점수
+    //강의실 별점 점수
     private Integer mark;
 
     //강의실 간단 리뷰글

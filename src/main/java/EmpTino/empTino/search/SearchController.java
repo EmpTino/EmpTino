@@ -26,7 +26,7 @@ public class SearchController {
     }
 
     @GetMapping("/find")
-    public String searchEmptyRooms(@RequestParam String building, @RequestParam String time, Model model) {
+    public String searchEmptyRooms(@RequestParam String building, @RequestParam int time, Model model) {
         List<ClassroomDAO> emptyClassrooms = searchService.findEmptyClassrooms(building, time);
 
         if (emptyClassrooms.isEmpty()) {

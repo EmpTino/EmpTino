@@ -6,6 +6,7 @@ import EmpTino.empTino.lecture.domain.LectureDAO;
 import EmpTino.empTino.lecture.service.LectureService;
 import EmpTino.empTino.lectureTime.domain.LectureTimeDAO;
 import EmpTino.empTino.lectureTime.service.LectureTimeService;
+import EmpTino.empTino.timetable.service.TimetableService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,11 +24,13 @@ public class ClassroomController {
     private final ClassroomService classroomService;
     private final LectureService lectureService;
     private final LectureTimeService lectureTimeService;
+    private final TimetableService timetableService;
 
-    public ClassroomController(ClassroomService classroomService, LectureService lectureService, LectureTimeService lectureTimeService) {
+    public ClassroomController(ClassroomService classroomService, LectureService lectureService, LectureTimeService lectureTimeService, TimetableService timetableService) {
         this.classroomService = classroomService;
         this.lectureService = lectureService;
         this.lectureTimeService = lectureTimeService;
+        this.timetableService = timetableService;
     }
 
     @GetMapping("/all")
@@ -99,5 +102,22 @@ public class ClassroomController {
         return "classroom_detail";
     }
 
+    @GetMapping("/search")
+    public String searchAvailableRooms(@RequestParam("time") int time,
+                                       @RequestParam("day") String day,
+                                       Model model){
 
+        List<ClassroomDAO> availableRooms = timetableService.findAvailableClassrooms(time, day);
+        log.info(availableRooms.toString());
+        if (availableRooms.isEmpty()) {
+            model.addAttribute("message", "빈 강의실 없음");
+        } else {
+            model.addAttribute("rooms", availableRooms);
+        }
+
+        model.addAttribute("selectedTime", time);
+        model.addAttribute("selectedDay", day);
+
+        return "searchList";
+    }
 }

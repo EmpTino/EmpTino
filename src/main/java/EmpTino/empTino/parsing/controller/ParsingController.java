@@ -1,41 +1,60 @@
 package EmpTino.empTino.parsing.controller;
-
-import EmpTino.empTino.parsing.service.ParsingService;
+import EmpTino.empTino.parsing.service.ExcelParserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.io.File;
+import java.io.IOException;
 
 @Controller
-@RequestMapping("/parsing")
+@RequestMapping("/excel")
 public class ParsingController {
 
-    private final ParsingService parsingService;
+    private final ExcelParserService excelParserService;
 
-    public ParsingController(ParsingService parsingService) {
-        this.parsingService = parsingService;
+    public ParsingController(ExcelParserService excelParserService) {
+        this.excelParserService = excelParserService;
     }
 
-    // 엑셀 파일 업로드 페이지로 이동
-    @RequestMapping("/upload")
-    public String showUploadPage() {
-        return "uploadExcel"; // JSP 파일 이름
+    /**
+     * 엑셀 업로드 페이지로 이동
+     */
+    @GetMapping("/upload")
+    public String uploadPage() {
+        return "upload"; // JSP 파일 이름 (upload.jsp)
     }
 
-    // 엑셀 파일 처리 로직
-    @PostMapping("/process")
-    public String processExcelFile(MultipartFile file, Model model) {
+    /**
+     * 엑셀 파일 업로드 및 처리
+     * @param file 업로드된 엑셀 파일
+     * @return 처리 결과 메시지를 포함한 페이지
+     * @throws IOException 파일 처리 중 오류
+     */
+    @PostMapping("/upload")
+    public ModelAndView uploadExcelFile(@RequestParam("file") MultipartFile file) throws IOException {
+        ModelAndView modelAndView = new ModelAndView("upload");
+
         try {
-            if (file.isEmpty()) {
-                model.addAttribute("message", "파일이 비어 있습니다. 올바른 파일을 업로드하세요.");
-                return "uploadExcel";
-            }
-            parsingService.parseAndSave(file); // Service 호출
-            model.addAttribute("message", "파일이 성공적으로 처리되었습니다!");
+            // 파일을 임시 디렉토리에 저장
+            File tempFile = File.createTempFile("lecture_data", ".xlsx");
+            file.transferTo(tempFile);
+
+            // 엑셀 파일 처리
+            excelParserService.processExcelFile(tempFile.getAbsolutePath());
+
+            // 임시 파일 삭제
+            tempFile.delete();
+
+            // 성공 메시지 전달
+            modelAndView.addObject("message", "엑셀 데이터가 성공적으로 처리되었습니다!");
         } catch (Exception e) {
-            model.addAttribute("message", "오류가 발생했습니다: " + e.getMessage());
+            // 실패 메시지 전달
+            modelAndView.addObject("message", "엑셀 처리 중 오류가 발생했습니다: " + e.getMessage());
         }
-        return "uploadExcel"; // 결과 메시지를 같은 페이지에 출력
+
+        return modelAndView;
     }
 }

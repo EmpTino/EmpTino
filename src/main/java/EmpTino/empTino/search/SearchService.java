@@ -20,7 +20,7 @@ public class SearchService {
         this.lectureTimeDAORepository = lectureTimeDAORepository;
     }
 
-    public List<ClassroomDAO> findEmptyClassrooms(String building, String time) {
+    public List<ClassroomDAO> findEmptyClassrooms(String building, int time) {
         // Fetch classrooms in the specified building
         List<ClassroomDAO> classroomsInBuilding = classroomDAORepository.findAll()
                 .stream()
@@ -30,7 +30,7 @@ public class SearchService {
         // Convert time to int
         int timeAsInt;
         try {
-            timeAsInt = Integer.parseInt(time);
+            timeAsInt = Integer.parseInt(String.valueOf(time));
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid time format: " + time);
         }
