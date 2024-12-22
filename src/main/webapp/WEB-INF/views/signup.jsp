@@ -82,7 +82,7 @@
 
 <div class="signup-container">
     <h2>회원가입</h2>
-    <form action="${pageContext.request.contextPath}/signup" method="post">
+    <form action="${pageContext.request.contextPath}/api/auth/signup" method="post">
         <label for="userName">ID</label>
         <input type="text" id="userName" name="userName" placeholder="아이디" required>
 

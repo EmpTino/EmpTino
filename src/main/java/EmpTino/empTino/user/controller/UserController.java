@@ -6,11 +6,12 @@ import EmpTino.empTino.user.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-@RestController
+@Controller
 @RequestMapping("/api/auth")
 public class UserController {
     private final UserService userService;
@@ -21,26 +22,52 @@ public class UserController {
         this.jwtUtil = jwtUtil;
     }
 
-    // 회원가입
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody UserDAO userDAO) {
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login";
+    }
+    @GetMapping("/signup")
+    public String showSignUpPage() {
+        return "signup";
+    }
+
+    // 회원가입 처리
+    @PostMapping("/signup")
+    public String signup(
+            @RequestParam String userName,
+            @RequestParam String password,
+            @RequestParam String nickname,
+            @RequestParam String realName,
+            Model model) {
         try {
-            UserDAO registeredUser = userService.register(userDAO);
-            return ResponseEntity.ok(registeredUser);
+            UserDAO user = new UserDAO();
+            user.setUserName(userName);
+            user.setPassword(password);
+            user.setNickname(nickname);
+            user.setRealName(realName);
+
+            userService.signup(user);
+            model.addAttribute("success", "회원가입이 완료되었습니다.");
+            return "redirect:/api/auth/login";
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            model.addAttribute("error", e.getMessage());
+            return "signup";
         }
     }
 
-    // 로그인
+    // 로그인 처리
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestParam String userName, @RequestParam String password) {
+    public String login(
+            @RequestParam String userName,
+            @RequestParam String password,
+            Model model) {
         try {
-            UserDAO loggedInUser = userService.login(userName, password);
-            String token = jwtUtil.generateToken(loggedInUser.getUserName());
-            return ResponseEntity.ok(Map.of("token", token));
+            UserDAO user = userService.login(userName, password);
+            model.addAttribute("message", user.getNickname() + "님 환영합니다.");
+            return "redirect:/"; // 로그인 성공 시 메인 화면으로 이동
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+            model.addAttribute("error", e.getMessage());
+            return "login"; // 실패 시 로그인 화면으로 다시 이동
         }
     }
 }

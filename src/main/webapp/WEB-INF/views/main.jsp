@@ -63,9 +63,9 @@
 <nav>
     <ul>
         <li><a href="${pageContext.request.contextPath}/search">강의실 찾기</a></li>
-        <li><a href="${pageContext.request.contextPath}/timetable">내 시간표</a></li>
-        <li><a href="${pageContext.request.contextPath}/friend">친구보기</a></li>
-        <li><a href="${pageContext.request.contextPath}/login">로그인</a></li>
+        <li><a href="${pageContext.request.contextPath}/api/timetable">내 시간표</a></li>
+        <li><a href="${pageContext.request.contextPath}/api/friend">친구보기</a></li>
+        <li><a href="${pageContext.request.contextPath}/api/auth/login">로그인</a></li>
     </ul>
 </nav>
 
