@@ -20,7 +20,7 @@ public class SearchService {
         this.lectureTimeDAORepository = lectureTimeDAORepository;
     }
 
-    public List<ClassroomDAO> findEmptyClassrooms(String building, String time) {
+    public List<ClassroomDAO> findEmptyClassrooms(String building, int time) {
         // Fetch classrooms in the specified building
         List<ClassroomDAO> classroomsInBuilding = classroomDAORepository.findAll()
                 .stream()

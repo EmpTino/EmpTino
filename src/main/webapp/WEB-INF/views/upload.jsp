@@ -60,7 +60,7 @@
 <body>
 <div class="container">
     <h1>엑셀 파일 업로드</h1>
-    <form action="/parsing/process" method="post" enctype="multipart/form-data">
+    <form action="/excel/upload" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="file">엑셀 파일 선택</label>
             <input type="file" id="file" name="file" accept=".xlsx" required>
