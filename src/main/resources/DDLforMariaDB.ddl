@@ -1,5 +1,5 @@
 use emptino;
-ALTER DATABASE emptino CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+# ALTER DATABASE emptino CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 -- Drop existing tables if they exist
 DROP TABLE IF EXISTS classroomdao;

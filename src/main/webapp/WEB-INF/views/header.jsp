@@ -61,7 +61,7 @@
     <ul>
         <li><a href="${pageContext.request.contextPath}/" class="active">메인</a></li>
         <li><a href="${pageContext.request.contextPath}/search">강의실 찾기</a></li>
-        <li><a href="${pageContext.request.contextPath}/api/timetable">내 시간표</a></li>
+        <li><a href="${pageContext.request.contextPath}/api/timetables">내 시간표</a></li>
         <li><a href="${pageContext.request.contextPath}/api/auth/login">로그인</a></li>
     </ul>
 </nav>

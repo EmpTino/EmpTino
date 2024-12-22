@@ -31,25 +31,30 @@ public class TimetableController {
         return authentication.getName(); // username을 userId로 사용
     }
 
-    // 로그인한 사용자의 시간표 조회 및 페이지 반환
+    // 시간표 조회 및 화면 표시
     @GetMapping
-    public String getTimeTableByUser(Model model) {
+    public Object getTimeTableOrView(@RequestParam(required = false) String format, Model model) {
         String loggedInUserId = getLoggedInUserId();
+
+        // 시간표 데이터 가져오기
         List<TimetableDAO> timetables = timetableService.getTimeTableByUserId(loggedInUserId);
 
-        // 시간표 데이터를 모델에 추가
-        model.addAttribute("timetables", timetables);
+        if ("json".equalsIgnoreCase(format)) {
+            // JSON 응답 반환
+            return ResponseEntity.ok(timetables);
+        } else {
+            // 요일 목록 추가
+            List<String> days = List.of("월", "화", "수", "목", "금");
+            model.addAttribute("days", days);
+            model.addAttribute("timetables", timetables);
 
-        // 요일 목록 추가
-        List<String> days = List.of("월", "화", "수", "목", "금");
-        model.addAttribute("days", days);
-
-        return "timetable"; // /WEB-INF/views/timetable.jsp로 매핑
+            // JSP 뷰 반환
+            return "timetable";
+        }
     }
 
-    // 시간표에 강의 추가 (REST API)
+    // 시간표에 강의 추가
     @PostMapping("/add")
-    @ResponseBody
     public ResponseEntity<TimetableDAO> addLecturesToTimeTable(
             @RequestBody List<Integer> lectureIds) {
         String loggedInUserId = getLoggedInUserId();

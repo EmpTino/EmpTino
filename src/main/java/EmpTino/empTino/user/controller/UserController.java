@@ -55,7 +55,6 @@ public class UserController {
         }
     }
 
-    // 로그인 처리
     @PostMapping("/login")
     public String login(
             @RequestParam String userName,
@@ -64,10 +63,10 @@ public class UserController {
         try {
             UserDAO user = userService.login(userName, password);
             model.addAttribute("message", user.getNickname() + "님 환영합니다.");
-            return "redirect:/"; // 로그인 성공 시 메인 화면으로 이동
+            return "redirect:/"; // 성공 시 메인 화면으로 리다이렉트
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", e.getMessage());
-            return "login"; // 실패 시 로그인 화면으로 다시 이동
+            return "redirect:/"; // 실패 시 로그인 화면으로 다시 이동
         }
     }
 }
